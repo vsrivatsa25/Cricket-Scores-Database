@@ -3,9 +3,7 @@ import sqlite3
 import random
 import os
 
-login=sqlite3.connect("example.db")
-c=login.cursor()
-print("Database Connected! Ready to Add Team")
+
 def insertVaribleIntoTable(vals):
     try:
         sqliteConnection = sqlite3.connect('example.db')
@@ -23,7 +21,8 @@ def insertVaribleIntoTable(vals):
         cursor.close()
 
     except sqlite3.Error as error:
-        print("Failed to insert Python variable into sqlite table", error)
+        sg.Popup(error)
+        cursor.close()
     finally:
         if (sqliteConnection):
             sqliteConnection.close()

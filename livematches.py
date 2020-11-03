@@ -18,9 +18,13 @@ score1=str(matchdets[0])+':'+str(matchdets[2])+'/'+str(matchdets[3])
 score2=str(matchdets[1])+':'+str(matchdets[4])+'/'+str(matchdets[5])
 layout = [[sg.Text(txt, auto_size_text=True)],
           [sg.Text(score1, auto_size_text=True)],
-          [sg.Text(score2, auto_size_text=True)],          
-          [sg.Button('Main Menu'),sg.Quit()]]
+          [sg.Text(score2, auto_size_text=True)],
+          [sg.Button('Main Menu'),sg.Button('Refresh'),sg.Quit()]]
 window = sg.Window('Live details', layout)
 event, value = window.Read()
 if event=='Main Menu':
+    window.close()
     os.system('usermenu.py')
+if event=='Refresh':
+    window.close()
+    os.system('livematches.py')

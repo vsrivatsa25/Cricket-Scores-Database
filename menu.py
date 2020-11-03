@@ -24,12 +24,20 @@ def button6():
     
 def button7():
     os.system('viewumpires.py')
+
+def button9():
+    os.system('viewstadium.py')
+
+def button10():
+    os.system('stadiums.py')
     
 func_dict = {'Add Match':button1,'Add Umpire':button8, 'Add Player':button2,'Add Teams':button3,'Search Player Details':button4,'View Teams':button5
-             ,'Logout':button6, 'View Umpires':button7 }
+             ,'Logout':button6, 'View Umpires':button7 ,'View Stadium':button9 ,'Add Stadium':button10 }
 layout = [[sg.Text('Please choose an option', auto_size_text=True)],
           [sg.Button('Add Match'), sg.Button('Add Player'), sg.Button('Add Teams'),sg.Button('Add Umpire')],
+          [sg.Button('Add Stadium')],
           [sg.Button('Search Player Details'), sg.Button('View Teams'),sg.Button('View Umpires')],
+          [sg.Button('View Stadium')],
           [sg.Button('Logout'),sg.Quit()]]
 window = sg.Window('Cricket Statistics', layout)
 event, value = window.Read()

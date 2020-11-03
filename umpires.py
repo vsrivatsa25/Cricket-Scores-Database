@@ -20,7 +20,8 @@ def insertVaribleIntoTable(vals):
         cursor.close()
 
     except sqlite3.Error as error:
-        print("Failed to insert Python variable into sqlite table", error)
+        sg.Popup(error)
+        cursor.close()
     finally:
         if (sqliteConnection):
             sqliteConnection.close()

@@ -1,8 +1,19 @@
 import PySimpleGUI as sg
 import os
+import sqlite3
 
-def button1():    
-    os.system('livematches.py')
+def button1():
+    sqliteConnection = sqlite3.connect('example.db')
+    cursor = sqliteConnection.cursor()
+    sqlite_search = """SELECT Team1,Team2,team1score,team1wickets,team2score,team2wickets,date from 'matches' where live=1;"""
+    cursor.execute(sqlite_search, )
+    sqliteConnection.commit()
+    if cursor.fetchall():
+        os.system('livematches.py')
+    else:
+        sg.Popup("No live match")
+        cursor.close()
+        os.system('usermenu.py')
 
 def button3():    
     os.system('oldmatches.py')

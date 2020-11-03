@@ -66,54 +66,68 @@ event, values = window.Read()
 totalscore=0
 wickets=0
 print(values)
-for i in range(11):
-    totalscore+=int(values[6*i+1])
-    sqlite_search = """UPDATE 'players' set Runs=Runs+? where name=?;"""
-    data_tuple = (int(values[6*i+1]),values[6*i])
-    cursor.execute(sqlite_search,data_tuple)
-    sqliteConnection.commit()
-    sqlite_search = """UPDATE 'players' set balls_faced=balls_faced+? where name=?;"""
-    data_tuple = (int(values[6*i+2]),values[6*i])
-    cursor.execute(sqlite_search,data_tuple)
-    sqliteConnection.commit()
-    sqlite_search = """UPDATE 'players' set fours=fours+? where name=?;"""
-    data_tuple = (int(values[6*i+3]),values[6*i])
-    cursor.execute(sqlite_search,data_tuple)
-    sqliteConnection.commit()
-    sqlite_search = """UPDATE 'players' set sixes=sixes+? where name=?;"""
-    data_tuple = (int(values[6*i+4]),values[6*i])
-    cursor.execute(sqlite_search,data_tuple)
-    sqliteConnection.commit()
-    sqlite_search = """UPDATE 'players' set high_score=? where name=? and runs>high_score;"""
-    data_tuple = (int(values[6*i+1]),values[6*i])
-    cursor.execute(sqlite_search,data_tuple)    
-    sqliteConnection.commit()
-    sqlite_search = """UPDATE 'matches' set team1score=? where team1=?;"""
-    data_tuple = (totalscore,team1)
-    cursor.execute(sqlite_search,data_tuple)
-    sqliteConnection.commit()
-    sqlite_search = """UPDATE 'matches' set team1wickets=team1wickets+1 where ?='True';"""
-    data_tuple = (str(values[6*i+5]),)
-    cursor.execute(sqlite_search,data_tuple)
-    sqliteConnection.commit()
-    sqlite_search = """UPDATE 'players' set innings=innings+1 where name=? and ?='True';"""
-    data_tuple = (values[6*i][0],str(values[6*i+5]))
-    cursor.execute(sqlite_search,data_tuple)
-    sqliteConnection.commit()
-print(players1,players2)
-for i in range(5):
-    sqlite_search = """UPDATE 'players' set balls_bowled=balls_bowled+? where name=?;"""
-    data_tuple = (int(values[66+4*i+1]),str(values[66+4*i]))
-    cursor.execute(sqlite_search,data_tuple)
-    sqliteConnection.commit()
-    sqlite_search = """UPDATE 'players' set runs_given=runs_given+? where name=?;"""
-    data_tuple = (int(values[66+4*i+2]),str(values[66+4*i]))
-    cursor.execute(sqlite_search,data_tuple)
-    sqliteConnection.commit()
-    sqlite_search = """UPDATE 'players' set wickets=wickets+? where name=?;"""
-    data_tuple = (int(values[66+4*i+3]),str(values[66+4*i]))
-    cursor.execute(sqlite_search,data_tuple)
-    sqliteConnection.commit()
+print(values[6+1])
+try:
+    for i in range(11):
+        totalscore+=int(values[6*i+1])
+
+        sqlite_search = """UPDATE 'players' set Runs=Runs+? where name=?;"""
+        data_tuple = (int(values[6*i+1]),values[6*i])
+        cursor.execute(sqlite_search,data_tuple)
+        sqliteConnection.commit()
+        sqlite_search = """UPDATE 'players' set balls_faced=balls_faced+? where name=?;"""
+        data_tuple = (int(values[6*i+2]),values[6*i])
+        cursor.execute(sqlite_search,data_tuple)
+        sqliteConnection.commit()
+        sqlite_search = """UPDATE 'players' set fours=fours+? where name=?;"""
+        data_tuple = (int(values[6*i+3]),values[6*i])
+        cursor.execute(sqlite_search,data_tuple)
+        sqliteConnection.commit()
+        sqlite_search = """UPDATE 'players' set sixes=sixes+? where name=?;"""
+        data_tuple = (int(values[6*i+4]),values[6*i])
+        cursor.execute(sqlite_search,data_tuple)
+        sqliteConnection.commit()
+        sqlite_search = """UPDATE 'players' set high_score=? where name=? and high_score<?;"""
+        data_tuple = (int(values[6*i+1]),values[6*i],values[6*i+1])
+        cursor.execute(sqlite_search,data_tuple)
+        sqliteConnection.commit()
+        sqlite_search = """UPDATE 'matches' set team1score=? where team1=? and Match_ID=?;"""
+        data_tuple = (totalscore,team1,match)
+        cursor.execute(sqlite_search,data_tuple)
+        sqliteConnection.commit()
+        sqlite_search = """UPDATE 'matches' set team1wickets=team1wickets+1 where ?='True' and Match_ID=?;"""
+        data_tuple = (str(values[6*i+5]),match)
+        cursor.execute(sqlite_search,data_tuple)
+        sqliteConnection.commit()
+        sqlite_search = """UPDATE 'players' set innings=innings+1 where name=? ;"""
+        data_tuple = (values[6*i],)
+        cursor.execute(sqlite_search,data_tuple)
+        sqliteConnection.commit()
+        sqlite_search = """UPDATE 'players' set Matches_Played=Matches_Played+1 where name=?;"""
+        data_tuple = (values[6*i],)
+        cursor.execute(sqlite_search, data_tuple)
+        sqliteConnection.commit()
+    print(players1,players2)
+    for i in range(5):
+        sqlite_search = """UPDATE 'players' set balls_bowled=balls_bowled+? where name=?;"""
+        data_tuple = (int(values[66+4*i+1]),values[66+4*i])
+        cursor.execute(sqlite_search,data_tuple)
+        sqliteConnection.commit()
+        sqlite_search = """UPDATE 'players' set runs_given=runs_given+? where name=?;"""
+        data_tuple = (int(values[66+4*i+2]),values[66+4*i])
+        cursor.execute(sqlite_search,data_tuple)
+        sqliteConnection.commit()
+        sqlite_search = """UPDATE 'players' set wickets=wickets+? where name=?;"""
+        data_tuple = (int(values[66+4*i+3]),values[66+4*i])
+        cursor.execute(sqlite_search,data_tuple)
+        sqliteConnection.commit()
+        sqlite_search = """UPDATE 'players' set Matches_Played=Matches_Played+1 where name=?;"""
+        data_tuple = (values[66 + 4*i],)
+        cursor.execute(sqlite_search, data_tuple)
+        sqliteConnection.commit()
+except:
+    pass
+window.close()
 os.system('matchdetails2.py')
 
 

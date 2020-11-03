@@ -27,11 +27,11 @@ def SearchPlayer(pname):
                 sr=round(records[0][4]*100/records[0][5],4)
             else:
                 sr="NaN"
-            sg.Popup("Name: ",records[0][0],"Country: ",records[0][1],"Matches Played: ",records[0][2],"Innings: ",records[0][3],
-                     "Runs Scored: ",records[0][4],"Average: ",avg,"Strike Rate: ",sr,"Balls Faced: ",records[0][5],"Fours: ",
-                     records[0][6],"Sixes: ",records[0][7],"High Score",records[0][8],
-                     "Balls Bowled: ",records[0][9],"Wickets: ",records[0][10],"Runs Given: ",records[0][11],
-                     "Catches:",records[0][12]
+            sg.Popup("Name: "+records[0][0],"Country: "+records[0][1],"Matches Played: "+str(records[0][2]),"Innings: "+str(records[0][3]),
+                     "Runs Scored: "+str(records[0][4]),"Average: "+str(avg),"Strike Rate: "+str(sr),"Balls Faced: "+str(records[0][5]),"Fours: "+
+                     str(records[0][6]),"Sixes: "+str(records[0][7]),"High Score"+str(records[0][8]),
+                     "Balls Bowled: "+str(records[0][9]),"Wickets: "+str(records[0][10]),"Runs Given: "+str(records[0][11]),
+                     "Catches:"+str(records[0][12])
                      )
         else:
             sg.Popup("Player not found")

@@ -25,10 +25,11 @@ sqliteConnection = sqlite3.connect('example.db')
 cursor = sqliteConnection.cursor()
 sqlite_search = """SELECT name from 'umpires';"""
 cursor.execute(sqlite_search,)
+conn = sqlite3.connect('example.db')
 sqliteConnection.commit()
-teams = cursor.fetchall()
+names = cursor.fetchall()
 layout = [[sg.Text('Select Umpire')],
-          [sg.InputCombo(teams, size=(20, 1)),sg.Button('Search')],          
+          [sg.InputCombo(names, size=(20, 1)),sg.Button('Search')],
           [sg.Button('Main Menu')]]
 # Create the Window
 window = sg.Window('Search Umpire Details', layout)

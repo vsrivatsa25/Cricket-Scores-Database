@@ -27,19 +27,23 @@ if event=='Ok':
     data=(values[0],values[1])
     cursor.execute(sqlite_search,data)
     sqliteConnection.commit()
-    matchdets = cursor.fetchall()
-    if len(matchdets)>0:
-        matchdets=matchdets[0]
-        team1=matchdets[0]
-        team2=matchdets[1]
-        txt=team1+' vs ' + team2+' on '+str(matchdets[6])
-        score1=str(matchdets[0])+':'+str(matchdets[2])+'/'+str(matchdets[3])
-        score2=str(matchdets[1])+':'+str(matchdets[4])+'/'+str(matchdets[5])
-        winner='Winner:'+str(matchdets[-1])
-        sg.Popup(txt,score1,      score2,winner)
+    matchdetss = cursor.fetchall()
+    if len(matchdetss)>0:
+        for i in range(0,len(matchdetss)):
+            matchdets=matchdetss[i]
+            team1=matchdets[0]
+            team2=matchdets[1]
+            txt=team1+' vs ' + team2+' on '+str(matchdets[6])
+            score1=str(matchdets[0])+':'+str(matchdets[2])+'/'+str(matchdets[3])
+            score2=str(matchdets[1])+':'+str(matchdets[4])+'/'+str(matchdets[5])
+            winner='Winner:'+str(matchdets[-1])
+            sg.Popup(txt,score1,      score2,winner)
     else:
         sg.Popup('No Matches Found')
+        window.Close()
     if event=='Ok':
+        window.close()
         os.system('usermenu.py')
 else:
+    window.close()
     os.system('usermenu.py')

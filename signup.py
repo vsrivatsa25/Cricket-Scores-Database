@@ -31,10 +31,12 @@ if r==0:
         sqliteConnection.commit()
         print("User successfullly registered. Please login now.")
         cursor.close()
+        window.close()
         os.system('start.py')
     else:
         sg.Popup("Passwords do not match. Try Again")
         print("Cancelling: Passwords do not match")
+        window.close()
         os.system('signup.py')        
 else:
     print("User already exists")
